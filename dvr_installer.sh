@@ -82,6 +82,13 @@ if ls /opt/resolve/libs/libgobject-2.0.so* >/dev/null 2>&1; then
     check_cmd
 fi
 
+# Fix desktop icon bug
+if ! cat /usr/share/applications/com.blackmagicdesign.resolve.desktop | grep -q "StartupWMClass=resolve"; then
+    echo -n "Adding StartupWMClass to desktop icon: "
+    echo 'StartupWMClass=resolve' >>/usr/share/applications/com.blackmagicdesign.resolve.desktop
+    check_cmd
+fi
+
 echo "Done."
 
 ###############################################################################
